@@ -16,7 +16,6 @@ class globalvars_class:
         self.database_date = self.updated_to()
         self.daily_covid_positive = self.covid_positive.groupby(self.covid_positive.index).sum()
         self.fig = plt.figure(figsize=(16, 10))
-        self.fig_saved = plt.figure(figsize=(16, 10))
     #functions
     def covid_pd_make(self):
         csv_lab = pd.read_csv("corona_lab_tests_ver_0090.csv")
@@ -39,10 +38,6 @@ class globalvars_class:
         output = io.BytesIO()
         FigureCanvasAgg(self.fig).print_png(output)
         self.fig.clf()
-        return Response(output.getvalue(), mimetype="image/png")
-    def plot_to_img_saved(self):
-        output = io.BytesIO()
-        FigureCanvasAgg(self.fig_saved).print_png(output)
         return Response(output.getvalue(), mimetype="image/png")
 
     def interact_positive_ema(self,ma):

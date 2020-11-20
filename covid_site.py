@@ -32,9 +32,7 @@ def interact_plot():
     return plot_maker.interact_positive_ema(ma=plot_maker.moving_avarge)
 
 
-@app.route("/inter_plot_saved.png")
-def interact_plot():
-    return plot_maker.interact_positive_ema(ma=plot_maker.moving_avarge)
+
 
 
 
