@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+<center><h1>This database is updated to   {{database_date}} </h1></center>
+<center><form action="/interact_ma" method="get"><input name="ma" type="number" value="{{ma}}" /> <input type="submit" value="update graph" /></form></center>
+
+<img src="/inter_plot.png" class="img-fluid" alt="Responsive image">
+
+{% endblock %}
