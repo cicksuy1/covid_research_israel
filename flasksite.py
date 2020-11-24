@@ -1,14 +1,18 @@
-from flask import Flask, render_template,request
-import plotly
 
+from flask import Flask, render_template,request,url_for
+import plotly
 import json
 from Ploty_Dash_learn.dash_plots import globalvars_class as plotmaker
 
 
 app = Flask(__name__)
+app.secret_key = "testing"
+
 
 ploter= plotmaker()
 static_figs = ploter.static_figs_json()
+
+
 
 
 
@@ -19,8 +23,10 @@ def index():
     return render_template("landing.html")
 
 
+
 @app.route("/interact_ma",methods=['GET','POST'])
 def interactive_graph():
+    #ma is a shortcut for Moving average
     by_accsidend=False
     fig = None
     try:
@@ -53,4 +59,4 @@ def static_plots():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
