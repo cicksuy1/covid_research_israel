@@ -2,7 +2,7 @@
 from flask import Flask, render_template,request,url_for
 import plotly
 import json
-from Ploty_Dash_learn.dash_plots import globalvars_class as plotmaker
+from dash_plots import globalvars_class as plotmaker
 
 
 app = Flask(__name__)
