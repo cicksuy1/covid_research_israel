@@ -31,7 +31,7 @@ python flask_site.py
 ![Example screenshot](https://i.postimg.cc/VLw4FsdV/Screenshot-4.png)
 
 ## Inspiration
-Thanks to leeroy solomon, Matan elgabri, Nikita Zalivan for insparation and supporting 
+Thanks to leeroy solomon, Matan elgabri, Nikita Zalivan for Inspiration and supporting 
 
 ## Contact
 Created by Ben Baldut Mail : xxlostangle@gmail.com
