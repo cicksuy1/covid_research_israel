@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<style>
+a {
+background-color: #00BFFF;
+  box-shadow: 0 5px 0 ;
+  color: white;
+  padding: 1em 1.5em;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a:hover {
+  background-color: #1E90FF;
+}
+
+a:active {
+  box-shadow: none;
+  top: 5px;
+}
+
+/* Non-Demo Styles */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+</style>
+
+
+<style>
+body {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: #34495e;
+  background-image: url("/static/virus-4835301_1920.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 160px;
+  overflow:hidden;
+
+  font-family: 'Lato', sans-serif;
+  font-size: 35px;
+  line-height: 40px;
+  color: #ecf0f1;
+
+
+
+    }
+  }
+}
+}
+</style>
+
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<body>
+<div class="content">
+  <div class="content__container">
+    <p class="content__container__text">
+      Covid-19 Graphs
+    </p>
+  </div>
+
+</div>
+ <p style="text-align: center;"><a href="/research">research</a> <a href="/interact_ma"> interactive graph</a></p>
+</body>
+
+
+
+{% endblock %}

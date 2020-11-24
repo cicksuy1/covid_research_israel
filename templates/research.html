@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block content %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+
+
+<h2 style="text-align: center;"><span style="color: #333300;">Welcome</span> to my covid-19 research page</h2>
+<h4 style="text-align: center;"><span style="color: #000000;">On this page, we will explore and analyze the Covid-19 Pandemic Data of Israel.</span></h4>
+
+
+
+<p style="text-align: center;"><strong>Moving averages graph</strong></p>
+  <div class="chart" id="three_ma">
+        <script>
+            var graphs = {{three_ma | safe}};
+            Plotly.plot('three_ma',graphs,{autorange: true});
+        </script>
+    </div>
+
+
+<p style="text-align: center;">In this graph, we checked the moving Covid-19 positive cases average in different time periods of 7, 30 and 60 days<br />By comparing the moving averages we can relate the behavior of the israeli people in different time periods to the amount of positive cases</p>
+<p style="text-align: center;">&nbsp;</p>
+
+
+<p style="text-align: center;"><strong>Comparison between people who have been tasted for the first time and people who have already been tasted and tested again in each day</strong></p>
+
+  <div class="chart" id="res_plot_first_test">
+        <script>
+            var graphs = {{res_plot_first_test | safe}};
+            Plotly.plot('res_plot_first_test',graphs,{autorange: true});
+        </script>
+    </div>
+
+<p style="text-align: center;">in this graph, we can see how many tests have been made every single day.<br />the graph makes a comparison between people who have been tasted for the first time and people who have already been tasted and tested again in each day.<br />The graph also shows Covid-19 positive results per day and a 7 days moving average of positive cases .<br />By looking at the graph, we can assume that maybe there is a correlation between the the amount of first time testing and non first time testing to the amount of positive cases. <br /></p>
+<p>&nbsp;</p>
+<p style="text-align: center;">&nbsp;</p>
+
+
+<p style="text-align: center;"><strong>Comparison between the the amount of first time testing and non first time testing to the amount of positive cases </strong></p>
+
+ <div class="chart" id="res_plot_first_test_positive">
+        <script>
+            var graphs = {{res_plot_first_test_positive | safe}};
+            Plotly.plot('res_plot_first_test_positive',graphs,{autorange: true});
+        </script>
+    </div>
+
+<p style="text-align: center;">from this graph, we can clearly see that over the first half-year people who made their first test are more likely to be positive for Covid-19<br />I assume that people who made several tests for Covid-19 are more likely to follow the government guidelines.<br /></p>
+<p style="text-align: center;">&nbsp;</p>
+
+<p style="text-align: center;"><strong>Quarantine graphs dates : 2020-03-14-2020-04-30 , 2020-09-18-2020-10-13</strong><br /><strong>with 7 days moving averages</strong></p>
+<p style="text-align: center;">&nbsp;</p>
+
+ <div class="chart" id="res_quantire">
+        <script>
+            var graphs = {{res_quantire | safe}};
+            Plotly.plot('res_quantire',graphs,{autorange: true});
+        </script>
+    </div>
+
+<p style="text-align: center;">&nbsp;<br />From this graph we can learn how well the society have been functioning during the two quarantines. <br /> </p>
+<p style="text-align: center;">from the graph, we can see that the two quarantines managed to lower drastically the average positive cases per day.<br /> We can assume from that most of the people did follow the government guidelines.</p>
+<p style="text-align: center;">&nbsp;</p>
+<p style="text-align: center;">&nbsp;</p>
+<p style="text-align: center;">&nbsp;</p>
+<p style="text-align: center;">&nbsp;</p>
+<p style="text-align: center;">&nbsp;</p>
+
+{% endblock %}

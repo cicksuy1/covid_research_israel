@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+<center><h1>This database is updated to   {{database_date}} </h1></center>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+
+<center><form action="/interact_ma" method="post"><input name="ma" type="number" value="{{ma}}" />
+    <input type="submit" name="ma"  value="update graph" />
+
+    <br><label for="save_avg">Save Moving avarge on graph?</label>
+    <input type="checkbox" id="save_avg" name="save"><br>
+</form></center>
+
+    <div class="chart" id="bargraph">
+        <script>
+            var graphs = {{plot | safe}};
+            Plotly.plot('bargraph',graphs,{autorange: true});
+            Plotly.relayout( graphs, {'xaxis.autorange': true,'yaxis.autorange': true});
+        </script>
+    </div>
+
+{% endblock %}
