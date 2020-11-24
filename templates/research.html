@@ -1,12 +1,38 @@
 {% extends "layout.html" %}
 {% block content %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
 
 
-<img src="/plot_3_ma.png" class="img-fluid" alt="Responsive image" >
-<p1>what is going on here??</p1>
-<img src="/positive_first_ma.png" class="img-fluid" alt="Responsive image">
 
 
+  <div class="chart" id="three_ma">
+        <script>
+            var graphs = {{three_ma | safe}};
+            Plotly.plot('three_ma',graphs,{autorange: true});
+        </script>
+    </div>
+
+  <div class="chart" id="res_plot_first_test">
+        <script>
+            var graphs = {{res_plot_first_test | safe}};
+            Plotly.plot('res_plot_first_test',graphs,{autorange: true});
+        </script>
+    </div>
+
+ <div class="chart" id="res_plot_first_test_positive">
+        <script>
+            var graphs = {{res_plot_first_test_positive | safe}};
+            Plotly.plot('res_plot_first_test_positive',graphs,{autorange: true});
+        </script>
+    </div>
+
+ <div class="chart" id="res_quantire">
+        <script>
+            var graphs = {{res_quantire | safe}};
+            Plotly.plot('res_quantire',graphs,{autorange: true});
+        </script>
+    </div>
 
 
 {% endblock %}
