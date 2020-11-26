@@ -1,10 +1,8 @@
 # Covid-19-research-israel
 
 A mini web application that contains research of Covid-19 pandemic in Israel and interactive graph.
-### 
-The main branch is for local web application.
-###
-Live application implementation is in different branch
+* The main branch is for local web application.
+* Live application implementation is in different branch
 
 ## Table of contents
 * [Data](#Data)
