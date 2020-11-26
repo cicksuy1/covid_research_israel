@@ -7,7 +7,6 @@ A mini web application that contains research of Covid-19 pandemic in Israel and
 * [External python libraries used](#External-python-libraries-used)
 * [Live-application](#Live-application)
 * [Screenshot](#Screenshot)
-* [Inspiration](#inspiration)
 * [Contact](#contact)
 
 python version: 3.7.9
@@ -31,8 +30,7 @@ https://covidgraphs.superus.tech/
 ## Screenshot
 ![screenshot](https://i.postimg.cc/VLw4FsdV/Screenshot-4.png)
 
-## Inspiration
-Thanks to Leeroy Solomon, Matan elgabri and Nikita Zalivan for supporting inspiration and motivation
+
 
 ## Contact
 Created by Ben Baldut Mail: xxlostangle@gmail.com
