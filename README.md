@@ -32,7 +32,7 @@ https://covidgraphs.superus.tech/
 ![screenshot](https://i.postimg.cc/VLw4FsdV/Screenshot-4.png)
 
 ## Inspiration
-Thanks to leeroy solomon, Matan elgabri, Nikita Zalivan for Inspiration and supporting 
+Thanks to Leeroy Solomon, Matan elgabri and Nikita Zalivan for supporting inspiration and motivation
 
 ## Contact
-Created by Ben Baldut Mail : xxlostangle@gmail.com
+Created by Ben Baldut Mail: xxlostangle@gmail.com
