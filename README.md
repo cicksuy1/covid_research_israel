@@ -6,6 +6,7 @@ A mini web application that contains research of Covid-19 pandemic in Israel and
 * [Data](#Data)
 * [External python libraries used](#External-python-libraries-used)
 * [Live-application](#Live-application)
+* [Screenshot](#Screenshot)
 * [Inspiration](#inspiration)
 * [Contact](#contact)
 
@@ -24,7 +25,7 @@ python flask_site.py
 * Pandas 1.0.1
 * Requests 2.22.0
 
-##Live-application
+## Live-application
 https://covidgraphs.superus.tech/
 
 ## Screenshot
