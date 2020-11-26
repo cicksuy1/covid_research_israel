@@ -14,7 +14,7 @@ python version: 3.7.9
 
 ## Database
 The code fetch his database from https://data.gov.il/ by using its ckan api request.
-the dataset comes csv inside json. and transfered to  pandas dataframe.
+the dataset comes as csv inside json. and transfered to  pandas dataframe.
 
 ## How to run
 make sure that all of the external libraries are installed and run the file
