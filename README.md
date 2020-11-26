@@ -2,7 +2,10 @@
 
 A mini web application that contains research of Covid-19 pandemic in Israel and interactive graph.
 * The main branch is for local web application.
-* Live application implementation of namecheap hosting servise is in different live_app branch
+* To use live application implementation for namecheap hosting remove from flasksite.py 
+```
+app.run()
+```
 
 ## Table of contents
 * [Data](#Data)
