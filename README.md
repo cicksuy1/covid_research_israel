@@ -6,6 +6,7 @@ A mini web application that contains research of Covid-19 pandemic in Israel and
 * [Data](#Data)
 * [External python libraries used](#External-python-libraries-used)
 * [Live-application](#Live-application)
+* [Plotly JavaScript method](#Plotly-JS)
 * [Screenshot](#Screenshot)
 * [Contact](#contact)
 
@@ -23,6 +24,22 @@ python flask_site.py
 * Plotly 4.12.0
 * Pandas 1.0.1
 * Requests 2.22.0
+
+
+## Plotly-JS
+This is the method i used to show the plotly graph inside the html
+```
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+  <div class="chart" id="covid graph"> 
+        <script>
+            var graphs = {{json_plotly_graph | safe}};
+            Plotly.plot('covid graph',graphs,{autorange: true});
+        </script>
+    </div>
+```
+
 
 ## Live-application
 https://covidgraphs.superus.tech/
