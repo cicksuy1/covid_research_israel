@@ -14,12 +14,18 @@ pd.options.plotting.backend = "plotly"
 
 class globalvars_class:
     def __init__(self):
-        self.covid_df = self.covid_pd_make_gov_api()
+        self.covid_df = self.covid_pd_make()
         self.covid_positive = self.covid_positive_frame()
         self.database_date = self.updated_to()
         self.daily_covid_positive = self.covid_positive.groupby(self.covid_positive.index).sum()
-        self.daily_covid_positive_saved = self.daily_covid_positive.copy(deep=False)
+        self.daily_covid_positive_saved = self.make_daily_covid_positive_saved()
         self.saved_ma_list= []
+
+
+    def make_daily_covid_positive_saved(self):
+        temp  = self.daily_covid_positive.copy(deep=False)
+        temp.rename(columns={'corona_result':'Covid-19 Positive results'}, inplace=True)
+        return temp
 
     #Reading and manipulating the Covid-19 result lab data from csv
     def covid_pd_make(self):
@@ -89,25 +95,25 @@ class globalvars_class:
         fig = go.Figure()
         fig.data = []
 
-    '''This function making a plot of positive results with the desired moving avarge.
+    '''This function making a plot of positive results with the desired moving average.
     receiving: ma = desired moving average , to_save_axis = will be true if the user want to save the plot'''
     def interactive_plot_ma(self,ma=7,to_save_axis= False):
         self.reset_figure()
         fig = None
         if not (to_save_axis):
             print("not Saving")
-            self.daily_covid_positive_saved[str(ma) + "D Moving avarge"] = self.daily_covid_positive_saved[
-                "corona_result"].rolling(window=ma).mean()
+            self.daily_covid_positive_saved[str(ma) + "D Moving average"] = self.daily_covid_positive_saved[
+                "Covid-19 Positive results"].rolling(window=ma).mean()
             fig = self.daily_covid_positive_saved.plot(width=1200, height=700)
-            if not (str(ma) + "D Moving avarge") in self.saved_ma_list:
-                self.daily_covid_positive_saved.drop([(str(ma) + "D Moving avarge")], axis=1, inplace=True)
+            if not (str(ma) + "D Moving average") in self.saved_ma_list:
+                self.daily_covid_positive_saved.drop([(str(ma) + "D Moving average")], axis=1, inplace=True)
         else:
             print("Saving")
-            self.daily_covid_positive_saved[str(ma) + "D Moving avarge"] = self.daily_covid_positive_saved[
-                "corona_result"].rolling(window=ma).mean()
+            self.daily_covid_positive_saved[str(ma) + "D Moving average"] = self.daily_covid_positive_saved[
+                "Covid-19 Positive results"].rolling(window=ma).mean()
             fig = self.daily_covid_positive_saved.plot(width=1200, height=700)
-            if not (str(ma) + "D Moving avarge") in self.saved_ma_list:
-                self.saved_ma_list.append((str(ma) + "D Moving avarge"))
+            if not (str(ma) + "D Moving average") in self.saved_ma_list:
+                self.saved_ma_list.append((str(ma) + "D Moving average"))
         return fig
 
     #plotting 3 moving average and returning the plot
