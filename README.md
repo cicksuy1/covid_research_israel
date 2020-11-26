@@ -2,20 +2,18 @@
 
 
 A mini web application that contains research of Covid-19 pandemic in Israel and interactive graph.
-python version: 3.7.9
 
 
 ## Table of contents
-* [Database](#Database)
+* [Data](#Data)
 * [External python libraries used](#External-python-libraries-used)
 * [Inspiration](#inspiration)
 * [Contact](#contact)
 
-
-## Database
-The code fetch his database from https://data.gov.il/ by using its ckan api request.
-the dataset comes as csv inside json. and transfered to  pandas dataframe.
-
+python version: 3.7.9
+## Data
+The application fetches data from https://data.gov.il/ by using its ckan API request.
+The data requested as CSV inside JSON and transferred to pandas dataframe.
 ## How to run
 make sure that all of the external libraries are installed and run the file
 ```
