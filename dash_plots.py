@@ -6,7 +6,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from io import StringIO
-
+from database_maker import database_to_pandas
 
 #Swiching pandas ploting backend to plotly
 pd.options.plotting.backend = "plotly"
@@ -29,14 +29,7 @@ class globalvars_class:
 
     #Reading and manipulating the Covid-19 result lab data from csv
     def covid_pd_make(self):
-        csv_lab = pd.read_csv("corona_lab_tests_ver_0090.csv")
-        csv_lab.index = pd.DatetimeIndex(csv_lab["result_date"])
-        csv_lab.drop(["result_date"], axis=1, inplace=True)
-        csv_lab["corona_result"][csv_lab["corona_result"] == "שלילי"] = 0
-        csv_lab["corona_result"][csv_lab["corona_result"] == "חיובי"] = 1
-        csv_lab["is_first_Test"][csv_lab["is_first_Test"] == "Yes"] = 1
-        csv_lab["is_first_Test"][csv_lab["is_first_Test"] == "No"] = 0
-        return csv_lab
+        return database_to_pandas()
 
     '''In this function we are reading and making database from info.data.gov.il about the corona test lab result
         From the api we getting the result in json and inside the json string in csv format.
