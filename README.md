@@ -24,6 +24,15 @@ make sure that all of the external libraries are installed and run the file
 ```
 python flask_site.py
 ```
+**Integration with sqlite3 database**
+The code located [Here](https://github.com/cicksuy1/covid_research_israel/tree/sqldb_working_site)
+Note:
+Before running the for the first time make sure that you run 
+Inside database_maker the function 
+```
+create_database()
+```
+after that the database will be created and ready to use in the site
 ## External-python-libraries-used
 * Flask 1.1.1
 * Plotly 4.12.0
