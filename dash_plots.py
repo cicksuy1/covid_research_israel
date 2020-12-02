@@ -97,23 +97,17 @@ class globalvars_class:
 
     '''This function making a plot of positive results with the desired moving average.
     receiving: ma = desired moving average , to_save_axis = will be true if the user want to save the plot'''
-    def interactive_plot_ma(self,ma=7,to_save_axis= False):
+
+    def interactive_plot_ma(self, ma=[7], to_save_axis=False):
         self.reset_figure()
         fig = None
-        if not (to_save_axis):
-            print("not Saving")
-            self.daily_covid_positive_saved[str(ma) + "D Moving average"] = self.daily_covid_positive_saved[
-                "Covid-19 Positive results"].rolling(window=ma).mean()
-            fig = self.daily_covid_positive_saved.plot(width=1200, height=700)
-            if not (str(ma) + "D Moving average") in self.saved_ma_list:
-                self.daily_covid_positive_saved.drop([(str(ma) + "D Moving average")], axis=1, inplace=True)
-        else:
-            print("Saving")
-            self.daily_covid_positive_saved[str(ma) + "D Moving average"] = self.daily_covid_positive_saved[
-                "Covid-19 Positive results"].rolling(window=ma).mean()
-            fig = self.daily_covid_positive_saved.plot(width=1200, height=700)
-            if not (str(ma) + "D Moving average") in self.saved_ma_list:
-                self.saved_ma_list.append((str(ma) + "D Moving average"))
+        tempdf = self.daily_covid_positive.copy(deep=False)
+        tempdf.rename(columns={'corona_result': 'Covid-19 Positive results'}, inplace=True)
+
+        for i in ma:
+            tempdf[str(i) + "D Moving average"] = tempdf['Covid-19 Positive results'].rolling(window=i).mean()
+
+        fig = tempdf.plot(width=1200, height=700)
         return fig
 
     #plotting 3 moving average and returning the plot

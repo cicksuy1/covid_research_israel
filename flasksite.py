@@ -1,13 +1,22 @@
 
-from flask import Flask, render_template,request,url_for
+from flask import Flask, render_template,request,url_for,session
 import plotly
 import json
 from dash_plots import globalvars_class as plotmaker
+from flask_sqlalchemy  import SQLAlchemy
+from flask_session import Session
 
 
 app = Flask(__name__)
-app.secret_key = "testing"
+app.config['SECRET_KEY'] = "testing"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///session.sqlite3'
+app.config['SESSION_TYPE'] = 'sqlalchemy'
 
+sessdb= SQLAlchemy(app)
+
+app.config['SESSION_SQLALCHEMY'] = sessdb
+
+sess = Session(app)
 
 ploter= plotmaker()
 static_figs = ploter.static_figs_json()
@@ -27,6 +36,13 @@ def index():
 @app.route("/interact_ma",methods=['GET','POST'])
 def interactive_graph():
     #ma is a shortcut for Moving average
+
+    if request.form.get('reset'):
+        session["UserSes"] = []
+        print("Session Is empty")
+    if session.get('UserSes') is None:
+        session["UserSes"] = []
+        print("Session Is empty")
     by_accsidend=False
     fig = None
     try:
@@ -34,17 +50,21 @@ def interactive_graph():
     except:
         by_accsidend = True
         ma=7
-
     if request.form.get('save') == "on":
         if not by_accsidend:
-            fig = ploter.interactive_plot_ma(ma=ma,to_save_axis=True)
+            if ma not in  session["UserSes"]:
+                session["UserSes"].append(ma)
+            fig = ploter.interactive_plot_ma(ma=session["UserSes"], to_save_axis=True)
         else:
-            fig = ploter.interactive_plot_ma(ma=ma, to_save_axis=False)
+            fig = ploter.interactive_plot_ma(ma=session["UserSes"], to_save_axis=False)
     else:
-        fig = ploter.interactive_plot_ma(ma=ma, to_save_axis=False)
+
+        fig = ploter.interactive_plot_ma(ma=session["UserSes"]+[ma], to_save_axis=False)
     fig.to_json()
+
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template("inter_ma.html",database_date=ploter.database_date,plot=graphJSON)
+
 
 
 
@@ -55,6 +75,6 @@ def static_plots():
 
 
 
-app.run()
+
 
 
