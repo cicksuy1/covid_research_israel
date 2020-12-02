@@ -56,6 +56,7 @@ This is the method i used to show the plotly graph inside the html
 
 
 ## Live-application
+**Temporarily Not available. Working on sessions integration**
 https://covidgraphs.superus.tech/
 
 ## Screenshot
