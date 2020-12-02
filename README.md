@@ -3,7 +3,7 @@
 A mini web application that contains research of Covid-19 pandemic in Israel and interactive graph.
 * The main branch is for local web application.
 * To use live application implementation for namecheap hosting remove from flasksite.py 
-* If your hosting servies have more than 3G ram i reccomend using the sql integration. Its much more better with auto update
+* If your hosting services have more provide more than 3G ram i reccomend using the sql integration. Its much more better with auto database update
 ```
 app.run()
 ```
