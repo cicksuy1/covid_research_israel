@@ -28,7 +28,7 @@ python flask_site.py
 The code located [Here](https://github.com/cicksuy1/covid_research_israel/tree/sqldb_working_site)
 Note:
 Before running the for the first time make sure that you run 
-Inside database_maker the function 
+Inside database_maker the function before launching the site
 ```
 create_database()
 ```
