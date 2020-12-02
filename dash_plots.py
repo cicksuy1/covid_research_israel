@@ -6,7 +6,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from io import StringIO
-
+from database_maker import database_to_pandas
 
 #Swiching pandas ploting backend to plotly
 pd.options.plotting.backend = "plotly"
@@ -14,65 +14,17 @@ pd.options.plotting.backend = "plotly"
 
 class globalvars_class:
     def __init__(self):
-        self.covid_df = self.covid_pd_make_gov_api()
+        self.covid_df = self.covid_pd_make()
         self.covid_positive = self.covid_positive_frame()
         self.database_date = self.updated_to()
         self.daily_covid_positive = self.covid_positive.groupby(self.covid_positive.index).sum()
-        self.daily_covid_positive_saved = self.daily_covid_positive.copy(deep=False)
         self.saved_ma_list= []
 
-    #Reading and manipulating the Covid-19 result lab data from csv
+
+
+    #Reading and manipulating the Covid-19 result lab data from database
     def covid_pd_make(self):
-        csv_lab = pd.read_csv("corona_lab_tests_ver_0090.csv")
-        csv_lab.index = pd.DatetimeIndex(csv_lab["result_date"])
-        csv_lab.drop(["result_date"], axis=1, inplace=True)
-        csv_lab["corona_result"][csv_lab["corona_result"] == "שלילי"] = 0
-        csv_lab["corona_result"][csv_lab["corona_result"] == "חיובי"] = 1
-        csv_lab["is_first_Test"][csv_lab["is_first_Test"] == "Yes"] = 1
-        csv_lab["is_first_Test"][csv_lab["is_first_Test"] == "No"] = 0
-        return csv_lab
-
-    '''In this function we are reading and making database from info.data.gov.il about the corona test lab result
-        From the api we getting the result in json and inside the json string in csv format.
-        used query parameters: limit,get_total,resource_id,total_records,records_format
-        read more how to execute api quary :https://docs.ckan.org/en/latest/maintaining/datastore.html#ckanext.datastore.logic.action.datastore_search
-    '''
-    def covid_pd_make_gov_api(self):
-
-        # gov api resource code to corona lab test results
-        resource_id = 'dcf999c1-d394-4b57-a5e0-9d014a62e046'
-        limit = 0
-        get_total = "True"
-        records_format ="csv"
-        #here we get by quary the total records of covids_test results
-        url = "https://data.gov.il/api/3/action/datastore_search?resource_id={}&include_total={}&limit={}".format(resource_id,get_total, limit)
-        response = requests.get(url)
-        response_json = response.json()
-        total_records = response_json['result']["total"]
-
-        #here we genererate all the values from the json csv
-        url = "https://data.gov.il/api/3/action/datastore_search?resource_id={}&limit={}&records_format={}".format(
-            resource_id, total_records,records_format)
-        response = requests.get(url)
-        response_json = response.json()
-        records = response_json['result']['records']
-
-        #Making csv readable for pandas dataframe
-        data = StringIO(records)
-        df = pd.read_csv(data, sep=",", names=["_id", "test_date", "result_date", "corona_result", "lab_id",
-                                                   "test_for_corona_diagnosis", "is_first_Test"])
-
-        ## here we cuts and manipuilating the data
-        df.drop(["_id"], axis=1, inplace=True)
-        #result_date is the only persist date colnum so we set it as datetime index
-        df.index = pd.DatetimeIndex(df["result_date"])
-        df.drop(["result_date"], axis=1, inplace=True)
-        df["corona_result"][df["corona_result"] == "שלילי"] = 0
-        df["corona_result"][df["corona_result"] == "חיובי"] = 1
-        df["is_first_Test"][df["is_first_Test"] == "Yes"] = 1
-        df["is_first_Test"][df["is_first_Test"] == "No"] = 0
-        return df
-
+        return database_to_pandas()
 
     #Making Covid-19 positive results as individual dataframe
     def covid_positive_frame(self):
@@ -89,26 +41,21 @@ class globalvars_class:
         fig = go.Figure()
         fig.data = []
 
-    '''This function making a plot of positive results with the desired moving avarge.
+    '''This function making a plot of positive results with the desired moving average.
     receiving: ma = desired moving average , to_save_axis = will be true if the user want to save the plot'''
-    def interactive_plot_ma(self,ma=7,to_save_axis= False):
+
+    def interactive_plot_ma(self,ma=[7],to_save_axis= False):
         self.reset_figure()
         fig = None
-        if not (to_save_axis):
-            print("not Saving")
-            self.daily_covid_positive_saved[str(ma) + "D Moving avarge"] = self.daily_covid_positive_saved[
-                "corona_result"].rolling(window=ma).mean()
-            fig = self.daily_covid_positive_saved.plot(width=1200, height=700)
-            if not (str(ma) + "D Moving avarge") in self.saved_ma_list:
-                self.daily_covid_positive_saved.drop([(str(ma) + "D Moving avarge")], axis=1, inplace=True)
-        else:
-            print("Saving")
-            self.daily_covid_positive_saved[str(ma) + "D Moving avarge"] = self.daily_covid_positive_saved[
-                "corona_result"].rolling(window=ma).mean()
-            fig = self.daily_covid_positive_saved.plot(width=1200, height=700)
-            if not (str(ma) + "D Moving avarge") in self.saved_ma_list:
-                self.saved_ma_list.append((str(ma) + "D Moving avarge"))
+        tempdf = self.daily_covid_positive.copy(deep=False)
+        tempdf.rename(columns={'corona_result': 'Covid-19 Positive results'}, inplace=True)
+
+        for i in ma:
+            tempdf[str(i) + "D Moving average"] = tempdf['Covid-19 Positive results'].rolling(window=i).mean()
+
+        fig = tempdf.plot(width=1200, height=700)
         return fig
+
 
     #plotting 3 moving average and returning the plot
     def three_ma(self):
